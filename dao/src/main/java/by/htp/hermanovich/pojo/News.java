@@ -1,7 +1,9 @@
 package by.htp.hermanovich.pojo;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Hermanovich Yauheni
@@ -69,5 +71,10 @@ public class News {
         result = 31 * result + (dateOfPublication != null ? dateOfPublication.hashCode() : 0);
         result = 31 * result + (contents != null ? contents.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "News " + id + ":::date" + dateOfPublication + ":::" + contents;
     }
 }

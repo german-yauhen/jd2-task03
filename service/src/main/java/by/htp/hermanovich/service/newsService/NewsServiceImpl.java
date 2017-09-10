@@ -1,0 +1,85 @@
+package by.htp.hermanovich.service.newsService;
+
+import by.htp.hermanovich.dao.exception.DaoException;
+import by.htp.hermanovich.dao.newsDao.NewsDao;
+import by.htp.hermanovich.dao.newsDao.NewsDaoImpl;
+import by.htp.hermanovich.pojo.News;
+import by.htp.hermanovich.service.constant.Constant;
+import by.htp.hermanovich.service.exception.ServiceException;
+import org.apache.log4j.Logger;
+import java.util.List;
+
+/**
+ * This class describes implementation of the methods from NewsService interface meant for execution
+ * corresponding methods from Dao module
+ * @author Hermanovich Yauheni
+ */
+public class NewsServiceImpl implements NewsService {
+
+    private static final Logger logger = Logger.getLogger(NewsServiceImpl.class);
+    //TODO IoC
+    private NewsDao newsDao = new NewsDaoImpl();
+
+    /**
+     * This method returns instance of the News object as a result of execution method from Dao module
+     * @param id an unigue identifier of the object
+     * @return an instance of News object
+     * @throws ServiceException
+     */
+    @Override
+    public News getNewsById(Integer id) throws ServiceException {
+        try {
+            return newsDao.getNewsById(id);
+        } catch (DaoException e) {
+            logger.error(e);
+            throw new ServiceException(Constant.SERVICE_DAO_ERROR, e);
+        }
+    }
+
+    /**
+     * This method accepts instance of the News object and transmits it to method from Dao module
+     * to save it to the corresponding database table
+     * @param news an instance of the News object which will be created
+     * @throws ServiceException
+     */
+    @Override
+    public void createNews(News news) throws ServiceException {
+        try {
+            newsDao.saveNews(news);
+        } catch (DaoException e) {
+            logger.error(e);
+            throw new ServiceException(Constant.SERVICE_DAO_ERROR, e);
+        }
+    }
+
+    /**
+     * This method accepts instance of the News object and transmits it to method from Dao module
+     * to delete it from the corresponding database table
+     * @param news an instance of the News object which will be deleted
+     * @throws ServiceException
+     */
+    @Override
+    public void deleteNews(News news) throws ServiceException {
+        try {
+            newsDao.deleteNews(news);
+        } catch (DaoException e) {
+            logger.error(e);
+            throw new ServiceException(Constant.SERVICE_DAO_ERROR, e);
+        }
+    }
+
+    /**
+     * This method invokes corresponding method from Dao module to get a collection of the news
+     * @return a collection of instances of the News objects
+     * @throws ServiceException
+     */
+    @Override
+    public List<News> getAllNews() throws ServiceException {
+        try {
+            return newsDao.getAllNews();
+        } catch (DaoException e) {
+            logger.error(e);
+            throw new ServiceException(Constant.SERVICE_DAO_ERROR, e);
+        }
+    }
+}
