@@ -20,12 +20,14 @@
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
 	<!-- Defines resourse properties -->
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="classpath:label" />
 		<property name="defaultEncoding" value="UTF-8"/>
 	</bean>
+
+	<import resource="classpath*:beans-dao.xml"/>
+	<import resource="classpath*:beans-service.xml"/>
 
 	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 		<property name="paramName" value="language" />

@@ -6,6 +6,7 @@ import by.htp.hermanovich.pojo.News;
 import by.htp.hermanovich.util.HibernateUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ import java.util.List;
  * corresponding classes and methods. All methods provides execution with transaction support.
  * @author Hermanovich Yauheni
  */
+@Repository("newsDao")
 public class NewsDaoImpl implements NewsDao {
 
     private static final Logger logger = Logger.getLogger(NewsDaoImpl.class);
@@ -34,7 +36,7 @@ public class NewsDaoImpl implements NewsDao {
             news = session.get(News.class, id);
             session.getTransaction().commit();
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(Constants.EXECUTE_QUERY_TO_DB_ERROR + e);
             session.getTransaction().rollback();
             throw new DaoException(Constants.EXECUTE_QUERY_TO_DB_ERROR, e);
         }
@@ -56,7 +58,7 @@ public class NewsDaoImpl implements NewsDao {
             session.save(news);
             session.getTransaction().commit();
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(Constants.EXECUTE_QUERY_TO_DB_ERROR + e);
             session.getTransaction().rollback();
             throw new DaoException(Constants.EXECUTE_QUERY_TO_DB_ERROR, e);
         }
@@ -77,7 +79,7 @@ public class NewsDaoImpl implements NewsDao {
             session.createQuery("delete from News where id=" + news.getId()).executeUpdate();
             session.getTransaction().commit();
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(Constants.EXECUTE_QUERY_TO_DB_ERROR + e);
             session.getTransaction().rollback();
             throw new DaoException(Constants.EXECUTE_QUERY_TO_DB_ERROR, e);
         }
@@ -99,7 +101,7 @@ public class NewsDaoImpl implements NewsDao {
             newsList = session.createQuery("from News order by dateOfPublication").getResultList();
             session.getTransaction().commit();
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(Constants.EXECUTE_QUERY_TO_DB_ERROR + e);
             session.getTransaction().rollback();
             throw new DaoException(Constants.EXECUTE_QUERY_TO_DB_ERROR, e);
         }

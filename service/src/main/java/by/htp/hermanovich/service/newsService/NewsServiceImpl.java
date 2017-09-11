@@ -2,11 +2,12 @@ package by.htp.hermanovich.service.newsService;
 
 import by.htp.hermanovich.dao.exception.DaoException;
 import by.htp.hermanovich.dao.newsDao.NewsDao;
-import by.htp.hermanovich.dao.newsDao.NewsDaoImpl;
 import by.htp.hermanovich.pojo.News;
 import by.htp.hermanovich.service.constant.Constant;
 import by.htp.hermanovich.service.exception.ServiceException;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
@@ -14,11 +15,13 @@ import java.util.List;
  * corresponding methods from Dao module
  * @author Hermanovich Yauheni
  */
+@Service("newsService")
 public class NewsServiceImpl implements NewsService {
 
+    @Autowired
+    private NewsDao newsDao;
+
     private static final Logger logger = Logger.getLogger(NewsServiceImpl.class);
-    //TODO IoC
-    private NewsDao newsDao = new NewsDaoImpl();
 
     /**
      * This method returns instance of the News object as a result of execution method from Dao module
