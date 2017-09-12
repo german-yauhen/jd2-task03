@@ -16,6 +16,10 @@ public class NewsView {
     public NewsView() {
     }
 
+    public static News getNewsInstance() {
+        return new News();
+    }
+
     public News getNewsMessage() {
         return newsMessage;
     }

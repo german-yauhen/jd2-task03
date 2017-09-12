@@ -25,16 +25,24 @@ public class NewsListCommand {
 
     private static final Logger logger = Logger.getLogger(NewsListCommand.class);
 
+    /**
+     * This method describes actions to retrieve a archives of the news,
+     * locates it to the model instance as a list and represents it on the corresponding page
+     * @param model - information which will be represented in the browser
+     * @return a name of view of a page associates with the list of news
+     */
     @RequestMapping(value = "/get-news-list", method = RequestMethod.GET)
     public String getNewsList(Model model) {
         String resultPage = null;
         try {
+            //TODO change the code
             System.out.println(newsService.getAllNews());
             resultPage = "news-list-page";
+            logger.info(Constants.SUCCESS);
         } catch (ServiceException e) {
             logger.error(e);
+            // TODO redirect to error.jsp or main-page.jsp
         }
-        logger.info(Constants.SUCCESS);
         return resultPage;
     }
 }

@@ -1,16 +1,17 @@
 package by.htp.hermanovich.pojo;
 
+import org.apache.log4j.Logger;
 import javax.persistence.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 /**
- * Created by Hermanovich Yauheni
+ * @author Hermanovich Yauheni
  */
 @Entity
 @Table(name = "news")
 public class News {
+
+    private static final Logger logger = Logger.getLogger(News.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

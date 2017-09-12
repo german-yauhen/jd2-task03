@@ -3,7 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 	<head>
-		<title>Main Page</title>
+		<title>Create News Context</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<spring:url value="/resources/css/main.css" var="mainCss" />
 		<link href="${mainCss}" rel="stylesheet" />
@@ -25,7 +25,32 @@
 		</div>
 		<div class="wrapper-main-content">
 			<div class="main-content">
-				<spring:message code="label.welcome"/>
+				<form:form modelAttribute="flashyNews" action="process-news-form">
+					<table>
+						<tr>
+							<td><label for="title">News Title</label></td>
+							<td><form:input id="title" type="text" path="contents.title"/></td>
+							<td><form:errors path="contents.title" cssClass="error"/></td>
+						</tr>
+						<tr>
+							<td><label for="date">News Date</label></td>
+							<td><form:input id="date" type="text" path="dateOfPublication"/></td>
+							<td><form:errors path="dateOfPublication" cssClass="error"/></td>
+						</tr>
+						<tr>
+							<td><label for="brief">Brief</label></td>
+							<td><form:textarea id="brief" path="contents.brief"/></td>
+							<td><form:errors path="contents.brief" cssClass="error"/></td>
+						</tr>
+						<tr>
+							<td><label for="content">Content</label></td>
+							<td><form:textarea id="content" path="contents.content"/></td>
+							<td><form:errors path="contents.content" cssClass="error"/></td>
+						</tr>
+					</table>
+					<input type="reset" value="RESET" />
+					<input type="submit" value="SAVE" />
+				</form:form>
 			</div>
 		</div>
 	</div>

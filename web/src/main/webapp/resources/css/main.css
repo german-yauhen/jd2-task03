@@ -10,6 +10,11 @@ footer {
     margin-bottom: 5px;
     margin-top: 5px;
 }
+.error {
+    font-style: oblique;
+    font-size: 12px;
+    color: firebrick;
+}
 .header-content {
     background-color: gainsboro;
     padding-left: 30px;
