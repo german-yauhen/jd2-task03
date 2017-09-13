@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.Valid;
 
 /**
@@ -24,11 +26,13 @@ import javax.validation.Valid;
  * @author Hermanovich Yauheni
  */
 @Controller
-@RequestMapping(value = "/add-news", method = RequestMethod.GET)
 public class AddNewsCommand {
 
     @Autowired
     private NewsService newsService;
+
+    @Autowired
+    private NewsView newsView;
 
     private static final Logger logger = Logger.getLogger(AddNewsCommand.class);
 
@@ -50,7 +54,7 @@ public class AddNewsCommand {
      * @param model - information which will be represented in the browser
      * @return a name of view of a page associates with the form of publication
      */
-    @RequestMapping(value = "/create-news-form", method = RequestMethod.GET)
+    @RequestMapping(value = "/add-news-context", method = RequestMethod.GET)
     public String redirectToRegisterNews(Model model) {
         model.addAttribute("flashyNews", NewsView.getNewsInstance());
         return "create-news";
@@ -74,11 +78,13 @@ public class AddNewsCommand {
         }
         try {
             newsService.createNews(flashyNews);
+            newsView.setNewsMessage(flashyNews);
+            model.addAttribute("newsView", newsView);
         } catch (ServiceException e) {
             logger.error(e);
-            // TODO redirect to error.jsp or main-page.jsp
+            return "redirect:/";
         }
-        model.addAttribute("viewedNews", flashyNews);
-        return "news-view";
+        logger.info(Constants.SUCCESS);
+        return "error-page";
     }
 }

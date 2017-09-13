@@ -3,38 +3,21 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 	<head>
-		<title>Main Page</title>
+		<title><spring:message code="label.mainpagename" /></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<spring:url value="/resources/css/main.css" var="mainCss" />
 		<link href="${mainCss}" rel="stylesheet" />
 	</head>
 	<body>
-	<header>
-		<div class="header-content">
-			<div class="application-title"><spring:message code="label.apptitle"/></div>
-			<div class="languages-content">
-				<div class="language-element"><a href="?language=en">English</a></div>
-				<div class="language-element"><a href="?language=ru">Russian</a></div>
-			</div>
-		</div>
-	</header>
+	<jsp:include page="header.jsp"/>
 	<div class="wrapper-middle-context">
-		<div class="wrapper-leftbar-content">
-			<div class="leftbar-element"><a href="news-list/get-news-list"><spring:message code="label.newslist" /></a></div>
-			<div class="leftbar-element"><a href="add-news/create-news-form"><spring:message code="label.addnews" /></a></div>
-		</div>
+		<jsp:include page="leftbar.jsp"/>
 		<div class="wrapper-main-content">
 			<div class="main-content">
 				<spring:message code="label.welcome"/>
 			</div>
 		</div>
 	</div>
-	<footer>
-		<div class="footer-content">
-			<div class="application-footer-data">
-				<spring:message code="label.copyright"/>
-			</div>
-		</div>
-	</footer>
+	<jsp:include page="footer.jsp"/>
 	</body>
 </html>

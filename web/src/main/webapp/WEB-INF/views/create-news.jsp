@@ -7,59 +7,54 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<spring:url value="/resources/css/main.css" var="mainCss" />
 		<link href="${mainCss}" rel="stylesheet" />
+		<script>
+			function resetForm() {
+				document.getElementById("regform").reset();
+            }
+            function submitSave() {
+			    var query = confirm("Confirm the saving operation.");
+			    if (query) return true;
+			    else return false;
+            }
+		</script>
 	</head>
 	<body>
-	<header>
-		<div class="header-content">
-			<div class="application-title"><spring:message code="label.apptitle"/></div>
-			<div class="languages-content">
-				<div class="language-element"><a href="?language=en">English</a></div>
-				<div class="language-element"><a href="?language=ru">Russian</a></div>
-			</div>
-		</div>
-	</header>
+	<jsp:include page="header.jsp"/>
 	<div class="wrapper-middle-context">
-		<div class="wrapper-leftbar-content">
-			<div class="leftbar-element"><a href="news-list/get-news-list"><spring:message code="label.newslist" /></a></div>
-			<div class="leftbar-element"><a href="add-news/create-news-form"><spring:message code="label.addnews" /></a></div>
-		</div>
+		<jsp:include page="leftbar.jsp"/>
 		<div class="wrapper-main-content">
 			<div class="main-content">
-				<form:form modelAttribute="flashyNews" action="process-news-form">
+				<form:form id="regform" modelAttribute="flashyNews" action="process-news-form" method="post">
 					<table>
 						<tr>
-							<td><label for="title">News Title</label></td>
+							<td><label for="title"><spring:message code="label.newstitle"/></label></td>
 							<td><form:input id="title" type="text" path="contents.title"/></td>
 							<td><form:errors path="contents.title" cssClass="error"/></td>
 						</tr>
 						<tr>
-							<td><label for="date">News Date</label></td>
+							<td><label for="date"><spring:message code="label.newsdate"/></label></td>
 							<td><form:input id="date" type="text" path="dateOfPublication"/></td>
 							<td><form:errors path="dateOfPublication" cssClass="error"/></td>
 						</tr>
 						<tr>
-							<td><label for="brief">Brief</label></td>
+							<td><label for="brief"><spring:message code="label.brief"/></label></td>
 							<td><form:textarea id="brief" path="contents.brief"/></td>
 							<td><form:errors path="contents.brief" cssClass="error"/></td>
 						</tr>
 						<tr>
-							<td><label for="content">Content</label></td>
+							<td><label for="content"><spring:message code="label.content"/></label></td>
 							<td><form:textarea id="content" path="contents.content"/></td>
 							<td><form:errors path="contents.content" cssClass="error"/></td>
 						</tr>
 					</table>
-					<input type="reset" value="RESET" />
-					<input type="submit" value="SAVE" />
+					<button type="submit" onclick="submitSave()"><spring:message code="label.btnsave"/></button>
+				</form:form>
+				<form:form action="news-list-context" method="get">
+					<button type="submit" onclick="resetForm()"><spring:message code="label.btncancel"/></button>
 				</form:form>
 			</div>
 		</div>
 	</div>
-	<footer>
-		<div class="footer-content">
-			<div class="application-footer-data">
-				<spring:message code="label.copyright"/>
-			</div>
-		</div>
-	</footer>
+	<jsp:include page="footer.jsp"/>
 	</body>
 </html>

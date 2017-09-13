@@ -2,7 +2,7 @@ package by.htp.hermanovich.pojo;
 
 import org.apache.log4j.Logger;
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * @author Hermanovich Yauheni
@@ -41,8 +41,8 @@ public class News {
         return dateOfPublication;
     }
 
-    public void setDateOfPublication(Date dateOfPublication) {
-        this.dateOfPublication = dateOfPublication;
+    public void setDateOfPublication(String dateOfPublication) {
+        this.dateOfPublication = java.sql.Date.valueOf(dateOfPublication);
     }
 
     public Contents getContents() {
@@ -76,6 +76,6 @@ public class News {
 
     @Override
     public String toString() {
-        return "News " + id + ":::date" + dateOfPublication + ":::" + contents;
+        return "News " + id + ":::date:" + dateOfPublication + ":::" + contents;
     }
 }

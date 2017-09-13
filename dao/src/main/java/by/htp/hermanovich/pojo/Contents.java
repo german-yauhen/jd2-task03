@@ -1,6 +1,10 @@
 package by.htp.hermanovich.pojo;
 
+import by.htp.hermanovich.constant.Constants;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Hermanovich Yauheni
@@ -14,12 +18,18 @@ public class Contents {
     @Column(name = "id_contents")
     private Integer id;
 
+    @NotNull(message = Constants.MUST_BE_FILLED)
+    @Size(min = 1, max = 100, message = Constants.TITLE_MUST_CONTAIN)
     @Column(name = "title")
     private String title;
 
+    @NotNull(message = Constants.MUST_BE_FILLED)
+    @Size(min = 1, max = 500, message = Constants.BRIEF_MUST_CONTAIN)
     @Column(name = "brief")
     private String brief;
 
+    @NotNull(message = Constants.MUST_BE_FILLED)
+    @Size(min = 1, max = 2048, message = Constants.CONTENT_MUST_CONTAIN)
     @Column(name = "content")
     private String content;
 

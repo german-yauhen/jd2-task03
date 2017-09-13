@@ -1,5 +1,5 @@
 package by.htp.hermanovich.pojo;
-
+import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
@@ -8,6 +8,7 @@ import java.util.List;
  * Also the entity of this class is used in registration part
  * @author  Hermanovich Yauheni
  */
+@Component
 public class NewsView {
 
     private News newsMessage;

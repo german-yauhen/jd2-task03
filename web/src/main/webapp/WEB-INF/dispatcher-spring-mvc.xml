@@ -11,6 +11,7 @@
 						http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- Add support for component scanning -->
 	<context:component-scan base-package="by.htp.hermanovich.command" />
+	<context:component-scan base-package="by.htp.hermanovich.pojo" />
 	<!-- Add support for conversion formatting and validation support -->
 	<mvc:annotation-driven />
 	<!-- Processes requests to receive static content like images, css, JavaScript -->
