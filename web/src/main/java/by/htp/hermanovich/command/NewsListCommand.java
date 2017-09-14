@@ -36,16 +36,14 @@ public class NewsListCommand {
      */
     @RequestMapping(value = "/news-list-context", method = RequestMethod.GET)
     public String getNewsList(Model model) {
-        String resultPage = null;
         try {
             newsView.setNewsList(newsService.getAllNews());
             model.addAttribute("newsView", newsView);
-            resultPage = "news-list-page";
             logger.info(Constants.SUCCESS);
+            return  "news-list-page";
         } catch (ServiceException e) {
             logger.error(e);
             return "error-page";
         }
-        return resultPage;
     }
 }

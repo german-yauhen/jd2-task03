@@ -87,3 +87,15 @@ footer {
 .leftbar-element {
 
 }
+.news-title-elem {
+    color: firebrick;
+}
+.news-date-elem {
+    color: forestgreen;
+}
+.news-brief-elem {
+    color: chocolate;
+}
+.link-elem {
+    color: midnightblue;
+}

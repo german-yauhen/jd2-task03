@@ -5,7 +5,6 @@
 <html>
 	<head>
 		<title><spring:message code="label.newsviewname"/></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<spring:url value="/resources/css/main.css" var="mainCss" />
 		<link href="${mainCss}" rel="stylesheet" />
 	</head>

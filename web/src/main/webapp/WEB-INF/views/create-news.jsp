@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
 		<title>Create News Context</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<spring:url value="/resources/css/main.css" var="mainCss" />
 		<link href="${mainCss}" rel="stylesheet" />
 		<script>
@@ -47,8 +47,8 @@
 							<td><form:errors path="contents.content" cssClass="error"/></td>
 						</tr>
 					</table>
-					<button type="submit" onclick="submitSave()"><spring:message code="label.btnsave"/></button>
 				</form:form>
+				<button form="regform" type="submit" onclick="submitSave()"><spring:message code="label.btnsave"/></button>
 				<form:form action="news-list-context" method="get">
 					<button type="submit" onclick="resetForm()"><spring:message code="label.btncancel"/></button>
 				</form:form>

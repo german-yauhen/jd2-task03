@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.Valid;
 
 /**
@@ -85,6 +83,6 @@ public class AddNewsCommand {
             return "redirect:/";
         }
         logger.info(Constants.SUCCESS);
-        return "error-page";
+        return "news-view";
     }
 }
