@@ -1,5 +1,7 @@
 package by.htp.hermanovich.pojo;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,12 +15,18 @@ public class NewsView {
 
     private News newsMessage;
     private List<News> newsList;
+    private List<News> taggedNews;
+    private Object getNewsList;
 
     public NewsView() {
     }
 
     public static News getNewsInstance() {
         return new News();
+    }
+
+    public static List<News> getTaggedNewsInstance() {
+        return new ArrayList<News>();
     }
 
     public News getNewsMessage() {
@@ -37,22 +45,36 @@ public class NewsView {
         this.newsList = newsList;
     }
 
+    public List<News> getTaggedNews() {
+        return taggedNews;
+    }
+
+    public void setTaggedNews(List<News> taggedNews) {
+        this.taggedNews = taggedNews;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        NewsView newsForm = (NewsView) o;
+        NewsView newsView = (NewsView) o;
 
-        if (newsMessage != null ? !newsMessage.equals(newsForm.newsMessage) : newsForm.newsMessage != null)
+        if (newsMessage != null ? !newsMessage.equals(newsView.newsMessage) : newsView.newsMessage != null)
             return false;
-        return newsList != null ? newsList.equals(newsForm.newsList) : newsForm.newsList == null;
+        if (newsList != null ? !newsList.equals(newsView.newsList) : newsView.newsList != null) return false;
+        return taggedNews != null ? taggedNews.equals(newsView.taggedNews) : newsView.taggedNews == null;
     }
 
     @Override
     public int hashCode() {
         int result = newsMessage != null ? newsMessage.hashCode() : 0;
         result = 31 * result + (newsList != null ? newsList.hashCode() : 0);
+        result = 31 * result + (taggedNews != null ? taggedNews.hashCode() : 0);
         return result;
+    }
+
+    public Object getGetNewsList() {
+        return getNewsList;
     }
 }

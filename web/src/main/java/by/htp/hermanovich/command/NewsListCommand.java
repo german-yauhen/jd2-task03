@@ -1,6 +1,7 @@
 package by.htp.hermanovich.command;
 
 import by.htp.hermanovich.constant.Constants;
+import by.htp.hermanovich.pojo.News;
 import by.htp.hermanovich.pojo.NewsView;
 import by.htp.hermanovich.service.exception.ServiceException;
 import by.htp.hermanovich.service.newsService.NewsService;
@@ -8,8 +9,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.ArrayList;
 
 /**
  * This class provides and describes actions/methods meant
@@ -38,6 +42,7 @@ public class NewsListCommand {
     public String getNewsList(Model model) {
         try {
             newsView.setNewsList(newsService.getAllNews());
+            newsView.setTaggedNews(NewsView.getTaggedNewsInstance());
             model.addAttribute("newsView", newsView);
             logger.info(Constants.SUCCESS);
             return  "news-list-page";
@@ -45,5 +50,20 @@ public class NewsListCommand {
             logger.error(e);
             return "error-page";
         }
+    }
+
+    /**
+     * This method describes actions to delete a list of the news has been chosen on the page
+     * The method receives a special data transfer object (DTO) received from the request, fetches
+     * a list of <i>news</i> objects as a filed of DTO and renders the list to the service module
+     * to delete the news from the database table
+     * @param newsView  - an entity of data transfer object which contains an entity
+     * @param model     - information which will be represented in the browser
+     * @return          a name of view of a page associates with the list of news
+     */
+    @RequestMapping(value = "/delete-news-list", method = RequestMethod.POST)
+    public String precesseDeleteNewsList(@ModelAttribute NewsView newsView, Model model) {
+        System.out.println(newsView.getTaggedNews());
+        return  "news-list-page";
     }
 }
