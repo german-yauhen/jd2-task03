@@ -61,7 +61,7 @@ public class NewsListCommand {
      * @param model     - information which will be represented in the browser
      * @return          a name of view of a page associates with the list of news
      */
-    @RequestMapping(value = "/delete-news-list", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete-news-list", method = RequestMethod.GET)
     public String precesseDeleteNewsList(@ModelAttribute NewsView newsView, Model model) {
         System.out.println(newsView.getTaggedNews());
         return  "news-list-page";

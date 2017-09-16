@@ -21,7 +21,7 @@
 		<jsp:include page="leftbar.jsp"/>
 		<div class="wrapper-main-content">
 			<div class="main-content">
-				<form:form id="newsListForm" modelAttribute="newsView" action="delete-news-list" method="post">
+				<form:form id="newsListForm" modelAttribute="newsView" action="delete-news-list" method="get">
 					<jstl:forEach items="${newsView.getNewsList()}" var="news">
 						<div class="news-title-elem">${news.getContents().getTitle()}</div>
 						<div class="news-date-elem">${news.getDateOfPublication().toString()}</div>
