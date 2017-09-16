@@ -1,6 +1,6 @@
 package by.htp.hermanovich.pojo;
-import org.springframework.stereotype.Component;
 
+import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class NewsView {
     private News newsMessage;
     private List<News> newsList;
     private List<News> taggedNews;
-    private Object getNewsList;
+    private List<Integer> taggedIds;
 
     public NewsView() {
     }
@@ -27,6 +27,10 @@ public class NewsView {
 
     public static List<News> getTaggedNewsInstance() {
         return new ArrayList<News>();
+    }
+
+    public static List<Integer> getTaggedIdsInstance() {
+        return new ArrayList<Integer>();
     }
 
     public News getNewsMessage() {
@@ -53,6 +57,14 @@ public class NewsView {
         this.taggedNews = taggedNews;
     }
 
+    public List<Integer> getTaggedIds() {
+        return taggedIds;
+    }
+
+    public void setTaggedIds(List<Integer> taggedIds) {
+        this.taggedIds = taggedIds;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,7 +75,8 @@ public class NewsView {
         if (newsMessage != null ? !newsMessage.equals(newsView.newsMessage) : newsView.newsMessage != null)
             return false;
         if (newsList != null ? !newsList.equals(newsView.newsList) : newsView.newsList != null) return false;
-        return taggedNews != null ? taggedNews.equals(newsView.taggedNews) : newsView.taggedNews == null;
+        if (taggedNews != null ? !taggedNews.equals(newsView.taggedNews) : newsView.taggedNews != null) return false;
+        return taggedIds != null ? taggedIds.equals(newsView.taggedIds) : newsView.taggedIds == null;
     }
 
     @Override
@@ -71,10 +84,7 @@ public class NewsView {
         int result = newsMessage != null ? newsMessage.hashCode() : 0;
         result = 31 * result + (newsList != null ? newsList.hashCode() : 0);
         result = 31 * result + (taggedNews != null ? taggedNews.hashCode() : 0);
+        result = 31 * result + (taggedIds != null ? taggedIds.hashCode() : 0);
         return result;
-    }
-
-    public Object getGetNewsList() {
-        return getNewsList;
     }
 }

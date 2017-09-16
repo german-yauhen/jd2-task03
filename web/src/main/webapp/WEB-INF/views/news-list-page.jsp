@@ -33,12 +33,12 @@
 							<a href="edit-news?news=${news}"><spring:message code="label.editname"/></a>
 						</div>
 						<div class="checkbox-elem">
-							<form:checkbox path="taggedNews" value="${news}"/>
+							<form:checkbox path="taggedIds" value="${news.getId()}"/>
 						</div>
 					</jstl:forEach>
 				</form:form>
 				<div class="button-delete-elem">
-					<button form="newsListForm" type="submit" onclick="submitDelete()"><spring:message code="label.btndelete"/></button>
+					<button form="newsListForm" type="submit" onclick="return submitDelete()"><spring:message code="label.btndelete"/></button>
 				</div>
 			</div>
 		</div>

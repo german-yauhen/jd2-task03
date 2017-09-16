@@ -10,12 +10,14 @@
 						http://www.springframework.org/schema/context
 						http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- Add support for component scanning -->
+	<context:component-scan base-package="by.htp.hermanovich.pojo"/>
+	<context:component-scan base-package="by.htp.hermanovich.dao"/>
+	<context:component-scan base-package="by.htp.hermanovich.service"/>
 	<context:component-scan base-package="by.htp.hermanovich.command" />
-	<context:component-scan base-package="by.htp.hermanovich.pojo" />
 	<!-- Add support for conversion formatting and validation support -->
 	<mvc:annotation-driven />
 	<!-- Processes requests to receive static content like images, css, JavaScript -->
-	<mvc:resources location="/resources/" mapping="/resources/**"/>
+	<mvc:resources location="./resources/" mapping="/resources/**"/>
 	<!-- Define Spring MVC view resolver -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
@@ -27,8 +29,11 @@
 		<property name="defaultEncoding" value="UTF-8"/>
 	</bean>
 
-	<import resource="classpath*:beans-dao.xml"/>
-	<import resource="classpath*:beans-service.xml"/>
+	<!-- Alternative method to describe external beans definition using import tag -->
+	<!--
+	<import resource="classpath:beans-dao.xml"/>
+	<import resource="classpath:beans-service.xml"/>
+	-->
 
 	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 		<property name="paramName" value="language" />
