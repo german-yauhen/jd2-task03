@@ -9,10 +9,12 @@
 		<link href="${mainCss}" rel="stylesheet" />
 		<script>
 			function submitDelete() {
-                var query = confirm("Confirm the delete operation.")
-                if (query) return true;
-                else return false;
-            }
+                if (confirm("Confirm the delete operation.")) {
+                    return true;
+                } else {
+                    return false;
+                }
+			}
 		</script>
 	</head>
 	<body>
@@ -22,18 +24,18 @@
 		<div class="wrapper-main-content">
 			<div class="main-content">
 				<form:form id="newsListForm" modelAttribute="newsView" action="delete-news-list" method="get">
-					<jstl:forEach items="${newsView.getNewsList()}" var="news">
-						<div class="news-title-elem">${news.getContents().getTitle()}</div>
-						<div class="news-date-elem">${news.getDateOfPublication().toString()}</div>
-						<div class="news-brief-elem">${news.getContents().getBrief()}</div>
+					<jstl:forEach items="${newsView.newsList}" var="news">
+						<div class="news-title-elem">${news.contents.title}</div>
+						<div class="news-date-elem">${news.dateOfPublication}</div>
+						<div class="news-brief-elem">${news.contents.brief}</div>
 						<div class="link-elem">
-							<a href="view-news?news=${news}"><spring:message code="label.viewname"/></a>
+							<a href="view-news?newsId=${news.id}"><spring:message code="label.viewname"/></a>
 						</div>
 						<div class="link-elem">
-							<a href="edit-news?news=${news}"><spring:message code="label.editname"/></a>
+							<a href="edit-news?newsId=${news.id}"><spring:message code="label.editname"/></a>
 						</div>
 						<div class="checkbox-elem">
-							<form:checkbox path="taggedIds" value="${news.getId()}"/>
+							<form:checkbox path="taggedIds" value="${news.id}"/>
 						</div>
 					</jstl:forEach>
 				</form:form>

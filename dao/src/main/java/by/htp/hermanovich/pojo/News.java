@@ -1,6 +1,6 @@
 package by.htp.hermanovich.pojo;
 
-import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,9 +9,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "news")
+@Component
 public class News {
-
-    private static final Logger logger = Logger.getLogger(News.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +21,7 @@ public class News {
     @Temporal(TemporalType.DATE)
     private Date dateOfPublication;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_contents")
     private Contents contents;
 
@@ -41,8 +40,8 @@ public class News {
         return dateOfPublication;
     }
 
-    public void setDateOfPublication(String dateOfPublication) {
-        this.dateOfPublication = java.sql.Date.valueOf(dateOfPublication);
+    public void setDateOfPublication(Date dateOfPublication) {
+        this.dateOfPublication = dateOfPublication;
     }
 
     public Contents getContents() {
@@ -76,6 +75,6 @@ public class News {
 
     @Override
     public String toString() {
-        return "News " + id + ":::date:" + dateOfPublication + ":::" + contents;
+        return "News" + id + ":::" + dateOfPublication + ":::" + contents;
     }
 }

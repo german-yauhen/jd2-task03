@@ -1,9 +1,9 @@
 package by.htp.hermanovich.service.newsService;
 
+import by.htp.hermanovich.constant.Constants;
 import by.htp.hermanovich.dao.exception.DaoException;
 import by.htp.hermanovich.dao.newsDao.NewsDao;
 import by.htp.hermanovich.pojo.News;
-import by.htp.hermanovich.service.constant.Constant;
 import by.htp.hermanovich.service.exception.ServiceException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class NewsServiceImpl implements NewsService {
             return newsDao.getNewsById(id);
         } catch (DaoException e) {
             logger.error(e);
-            throw new ServiceException(Constant.SERVICE_DAO_ERROR, e);
+            throw new ServiceException(Constants.SERVICE_DAO_ERROR, e);
         }
     }
 
@@ -51,23 +51,23 @@ public class NewsServiceImpl implements NewsService {
             newsDao.saveNews(news);
         } catch (DaoException e) {
             logger.error(e);
-            throw new ServiceException(Constant.SERVICE_DAO_ERROR, e);
+            throw new ServiceException(Constants.SERVICE_DAO_ERROR, e);
         }
     }
 
     /**
      * This method accepts instance of the News object and transmits it to method from Dao module
      * to delete it from the corresponding database table
-     * @param news an instance of the News object which will be deleted
+     * @param newsId an id of the News in the database table object which will be deleted
      * @throws ServiceException
      */
     @Override
-    public void deleteNews(News news) throws ServiceException {
+    public void deleteNews(Integer newsId) throws ServiceException {
         try {
-            newsDao.deleteNews(news);
+            newsDao.deleteNews(newsId);
         } catch (DaoException e) {
             logger.error(e);
-            throw new ServiceException(Constant.SERVICE_DAO_ERROR, e);
+            throw new ServiceException(Constants.SERVICE_DAO_ERROR, e);
         }
     }
 
@@ -82,7 +82,7 @@ public class NewsServiceImpl implements NewsService {
             return newsDao.getAllNews();
         } catch (DaoException e) {
             logger.error(e);
-            throw new ServiceException(Constant.SERVICE_DAO_ERROR, e);
+            throw new ServiceException(Constants.SERVICE_DAO_ERROR, e);
         }
     }
 }

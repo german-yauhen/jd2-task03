@@ -29,10 +29,10 @@ public interface NewsService {
     /**
      * This method accepts instance of the News object and transmits it to method from Dao module
      * to delete it from the corresponding database table
-     * @param news an instance of the News object which will be deleted
+     * @param newsId an id of the News in the database table object which will be deleted
      * @throws ServiceException
      */
-    void deleteNews(News news) throws ServiceException;
+    void deleteNews(Integer newsId) throws ServiceException;
 
     /**
      * This method invokes corresponding method from Dao module to get a collection of the news

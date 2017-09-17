@@ -1,6 +1,9 @@
 package by.htp.hermanovich.pojo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,16 +16,15 @@ import java.util.List;
 @Component
 public class NewsView {
 
-    private News newsMessage;
+    @Autowired
+    @Valid
+    private News newsEntity;
+    @NotNull(message = "The field must be filled")
+    private String stringDateOfPublication;
     private List<News> newsList;
-    private List<News> taggedNews;
     private List<Integer> taggedIds;
 
     public NewsView() {
-    }
-
-    public static News getNewsInstance() {
-        return new News();
     }
 
     public static List<News> getTaggedNewsInstance() {
@@ -33,12 +35,20 @@ public class NewsView {
         return new ArrayList<Integer>();
     }
 
-    public News getNewsMessage() {
-        return newsMessage;
+    public News getNewsEntity() {
+        return newsEntity;
     }
 
-    public void setNewsMessage(News newsMessage) {
-        this.newsMessage = newsMessage;
+    public void setNewsEntity(News newsEntity) {
+        this.newsEntity = newsEntity;
+    }
+
+    public String getStringDateOfPublication() {
+        return stringDateOfPublication;
+    }
+
+    public void setStringDateOfPublication(String stringDateOfPublication) {
+        this.stringDateOfPublication = stringDateOfPublication;
     }
 
     public List<News> getNewsList() {
@@ -47,14 +57,6 @@ public class NewsView {
 
     public void setNewsList(List<News> newsList) {
         this.newsList = newsList;
-    }
-
-    public List<News> getTaggedNews() {
-        return taggedNews;
-    }
-
-    public void setTaggedNews(List<News> taggedNews) {
-        this.taggedNews = taggedNews;
     }
 
     public List<Integer> getTaggedIds() {
@@ -72,18 +74,18 @@ public class NewsView {
 
         NewsView newsView = (NewsView) o;
 
-        if (newsMessage != null ? !newsMessage.equals(newsView.newsMessage) : newsView.newsMessage != null)
+        if (newsEntity != null ? !newsEntity.equals(newsView.newsEntity) : newsView.newsEntity != null) return false;
+        if (stringDateOfPublication != null ? !stringDateOfPublication.equals(newsView.stringDateOfPublication) : newsView.stringDateOfPublication != null)
             return false;
         if (newsList != null ? !newsList.equals(newsView.newsList) : newsView.newsList != null) return false;
-        if (taggedNews != null ? !taggedNews.equals(newsView.taggedNews) : newsView.taggedNews != null) return false;
         return taggedIds != null ? taggedIds.equals(newsView.taggedIds) : newsView.taggedIds == null;
     }
 
     @Override
     public int hashCode() {
-        int result = newsMessage != null ? newsMessage.hashCode() : 0;
+        int result = newsEntity != null ? newsEntity.hashCode() : 0;
+        result = 31 * result + (stringDateOfPublication != null ? stringDateOfPublication.hashCode() : 0);
         result = 31 * result + (newsList != null ? newsList.hashCode() : 0);
-        result = 31 * result + (taggedNews != null ? taggedNews.hashCode() : 0);
         result = 31 * result + (taggedIds != null ? taggedIds.hashCode() : 0);
         return result;
     }

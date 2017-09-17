@@ -10,10 +10,13 @@
 						http://www.springframework.org/schema/context
 						http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- Add support for component scanning -->
+	<!--
 	<context:component-scan base-package="by.htp.hermanovich.pojo"/>
 	<context:component-scan base-package="by.htp.hermanovich.dao"/>
 	<context:component-scan base-package="by.htp.hermanovich.service"/>
+	-->
 	<context:component-scan base-package="by.htp.hermanovich.command" />
+
 	<!-- Add support for conversion formatting and validation support -->
 	<mvc:annotation-driven />
 	<!-- Processes requests to receive static content like images, css, JavaScript -->

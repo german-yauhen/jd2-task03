@@ -67,16 +67,18 @@ public class NewsDaoImpl implements NewsDao {
 
     /**
      * This method deletes an instance of the News object from corresponding database table
-     * @param news an instance of the News object which will be deleted
+     * @param newsId an id of the News in the database table object which will be deleted
      * @throws DaoException
      */
     @Override
-    public void deleteNews(News news) throws DaoException {
+    public void deleteNews(Integer newsId) throws DaoException {
         Session session = null;
         try {
+            News newsToDelete = getNewsById(newsId);
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
-            session.createQuery("delete from News where id=" + news.getId()).executeUpdate();
+            session.delete(newsToDelete);
+//            session.createQuery("delete from News where id=" + newsId).executeUpdate();
             session.getTransaction().commit();
         } catch (Exception e) {
             logger.error(Constants.EXECUTE_QUERY_TO_DB_ERROR + e);

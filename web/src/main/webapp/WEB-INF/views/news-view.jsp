@@ -7,6 +7,15 @@
 		<title><spring:message code="label.newsviewname"/></title>
 		<spring:url value="/resources/css/main.css" var="mainCss" />
 		<link href="${mainCss}" rel="stylesheet" />
+		<script type="text/javascript">
+            function confirmUpdateDelete() {
+                if (confirm("Please, confirm the action.")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+		</script>
 	</head>
 	<body>
 		<jsp:include page="header.jsp"/>
@@ -17,21 +26,33 @@
 					<table>
 						<tr>
 							<td><label id="title"><spring:message code="label.newstitle"/></label></td>
-							<td>${newsView.getNewsMessage().getContents().getTitle()}</td>
+							<td>${newsView.newsEntity.contents.title}</td>
 						</tr>
 						<tr>
 							<td><label id="date"><spring:message code="label.newsdate"/></label></td>
-							<td>${String.valueOf(newsView.getNewsMessage().getDateOfPublication())}</td>
+							<td>${newsView.stringDateOfPublication}</td>
 						</tr>
 						<tr>
 							<td><label id="brief"><spring:message code="label.brief"/></label></td>
-							<td>${newsView.getNewsMessage().getContents().getBrief()}</td>
+							<td>${newsView.newsEntity.contents.brief}</td>
 						</tr>
 						<tr>
 							<td><label id="content"><spring:message code="label.content"/></label></td>
-							<td>${newsView.getNewsMessage().getContents().getContent()}</td>
+							<td>${newsView.newsEntity.contents.content}</td>
 						</tr>
 					</table>
+					<form action="delete-news" method="post">
+						<input type="hidden" name="newsId" value="${newsView.newsEntity.id}" />
+						<button type="submit" onclick="return confirmUpdateDelete()">
+							<spring:message code="label.btndelete"/>
+						</button>
+					</form>
+					<form action="edit-news" method="post">
+						<input type="hidden" name="newsId" value="${newsView.newsEntity.id}" />
+						<button type="submit" onclick="return confirmUpdateDelete()">
+							<spring:message code="label.btnedit"/>
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>

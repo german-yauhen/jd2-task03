@@ -12,11 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.sql.Date;
 
 /**
  * This class provides and describes actions/methods meant for processing with
@@ -24,7 +22,7 @@ import javax.validation.Valid;
  * @author Hermanovich Yauheni
  */
 @Controller
-public class AddNewsCommand {
+public class NewsCommand {
 
     @Autowired
     private NewsService newsService;
@@ -32,7 +30,7 @@ public class AddNewsCommand {
     @Autowired
     private NewsView newsView;
 
-    private static final Logger logger = Logger.getLogger(AddNewsCommand.class);
+    private static final Logger logger = Logger.getLogger(NewsCommand.class);
 
     /**
      * The method is used for populating command and form object
@@ -53,8 +51,9 @@ public class AddNewsCommand {
      * @return a name of view of a page associates with the form of publication
      */
     @RequestMapping(value = "/add-news-context", method = RequestMethod.GET)
-    public String redirectToRegisterNews(Model model) {
-        model.addAttribute("flashyNews", NewsView.getNewsInstance());
+    public String redirectToCreateNews(Model model) {
+        newsView.setNewsEntity(newsView.getNewsEntity());
+        model.addAttribute("newsView", newsView);
         return "create-news";
     }
 
@@ -62,27 +61,61 @@ public class AddNewsCommand {
      * This method describes actions meant for process information about news instance stored
      * into the request object and to insert flashy news into the database table.
      * Also method implements a validation this stored data.
-     * @param flashyNews - an actual flashy news which will be stored into the database table
+     * @param newsView - an entity of DTO which contains all necessary information
      * @param bindingResult - an object holds the results of validation
-     * @param model - information which will be processed and represented in the browser
      * @return a name of view of a page associates with overview of the news
+     * @return
      */
     @RequestMapping(value = "/process-news-form", method = RequestMethod.POST)
-    public String processRegisterNewsForm(@Valid @ModelAttribute(value = "flashyNews") News flashyNews,
-                                          BindingResult bindingResult, Model model) {
+    public String processCreateNews(@Valid @ModelAttribute("newsView") NewsView newsView,
+                                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             logger.info(Constants.FORM_FIELDS_ERROR);
             return "create-news";
         }
         try {
+            News flashyNews = newsView.getNewsEntity();
+            flashyNews.setDateOfPublication(Date.valueOf(newsView.getStringDateOfPublication()));
             newsService.createNews(flashyNews);
-            newsView.setNewsMessage(flashyNews);
-            model.addAttribute("newsView", newsView);
+            newsView.setNewsEntity(flashyNews);
+            logger.info(Constants.SUCCESS);
+            return "news-view";
         } catch (ServiceException e) {
             logger.error(e);
-            return "redirect:/";
+            return "error-page";
         }
-        logger.info(Constants.SUCCESS);
-        return "news-view";
+    }
+
+    @RequestMapping(value = "/view-news", method = RequestMethod.GET)
+    public String processViewNews(@RequestParam("newsId") Integer newsId, Model model) {
+        try {
+            newsView.setNewsEntity(newsService.getNewsById(newsId));
+            newsView.setStringDateOfPublication(String.valueOf(newsView.getNewsEntity().getDateOfPublication()));
+            model.addAttribute("newsView", newsView);
+            logger.info(Constants.SUCCESS);
+            return "news-view";
+        } catch (ServiceException e) {
+            logger.error(e);
+            return "error-page";
+        }
+    }
+
+    @RequestMapping(value = "/delete-news", method = RequestMethod.POST)
+    public String processDeleteNews(@RequestParam("newsId") Integer newsId, Model model) {
+        System.out.println("News to delete " + newsId);
+        try {
+            newsService.deleteNews(newsId);
+            logger.info(Constants.SUCCESS);
+            return "redirect:/news-list-context";
+        } catch (ServiceException e) {
+            logger.error(e);
+            return "error-page";
+        }
+    }
+
+    @RequestMapping(value = "/edit-news", method = RequestMethod.POST)
+    public String redirectToEditNews(@RequestParam("newsId") Integer newsId) {
+        System.out.println("News to edit " + newsId);
+        return  "news-view";
     }
 }
