@@ -5,7 +5,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * Created by Hermanovich Yauheni
+ * This class describes an entity Contents object which is the field of News object
+ * The entities of this class are used by Hibernate framework
+ * The fields of the class annotated according to the corresponding columns in the database table
+ * The fields of the class annotated according by javax annotations to provide validation operation
+ * @author  Hermanovich Yauheni
  */
 @Entity
 @Table(name = "contents")

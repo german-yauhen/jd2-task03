@@ -1,7 +1,8 @@
 package by.htp.hermanovich.constant;
 
 /**
- * Created by Hermanovich Yauheni
+ * This class contains the string values of the constants
+ * @author  Hermanovich Yauheni
  */
 public class Constants {
     public static final String SUCCESS = "Success";

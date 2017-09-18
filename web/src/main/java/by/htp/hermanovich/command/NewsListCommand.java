@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import java.util.List;
 
 /**
  * This class provides and describes actions/methods meant
@@ -59,10 +58,15 @@ public class NewsListCommand {
      */
     @RequestMapping(value = "/delete-news-list", method = RequestMethod.GET)
     public String processDeleteNewsList(NewsView newsView, Model model) {
-        List<Integer> newsIdsToDelete = newsView.getTaggedIds();
-        for (Integer id: newsIdsToDelete) {
-            System.out.println(id.getClass() + ":" + id);
+        try {
+            for (Integer newsId : newsView.getTaggedIds()) {
+                newsService.deleteNews(newsService.getNewsById(newsId));
+            }
+            logger.info(Constants.SUCCESS);
+            return  "redirect:/news-list-context";
+        } catch (ServiceException e) {
+            logger.error(e);
+            return "error-page";
         }
-        return  "redirect:/news-list-context";
     }
 }

@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class describes an entity of News object which is used for UI part of the application
+ * This class describes an entity of NewsView object which is used for UI part of the application
+ * The entity of this class doesn't have any behavior and is used to pass data with multiple attributes
+ * in one shot from client to server
  * The entity of this class is included into jsp page and represented on view part of the page
- * Also the entity of this class is used in registration part
+ * @see News
  * @author  Hermanovich Yauheni
  */
 @Component

@@ -28,10 +28,10 @@ public interface NewsDao {
 
     /**
      * This method deletes an instance of the News object from corresponding database table
-     * @param newsId an id of the News in the database table object which will be deleted
+     * @param news an instance of the News object which will be deleted
      * @throws DaoException
      */
-    void deleteNews(Integer newsId) throws DaoException;
+    void deleteNews(News news) throws DaoException;
 
     /**
      * This method reads all instances of the News objects from corresponding database table

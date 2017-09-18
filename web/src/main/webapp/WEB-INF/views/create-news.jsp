@@ -29,22 +29,22 @@
 					<table>
 						<tr>
 							<td><label for="title"><spring:message code="label.newstitle"/></label></td>
-							<td><form:input id="title" type="text" path="newsEntity.contents.title"/></td>
+							<td><form:input id="title" type="text" path="newsEntity.contents.title" /></td>
 							<td><form:errors path="newsEntity.contents.title" cssClass="error"/></td>
 						</tr>
 						<tr>
 							<td><label for="date"><spring:message code="label.newsdate"/></label></td>
-							<td><form:input id="date" type="text" path="stringDateOfPublication"/></td>
+							<td><form:input id="date" type="text" path="stringDateOfPublication" placeholder=""/></td>
 							<td><form:errors path="stringDateOfPublication" cssClass="error"/></td>
 						</tr>
 						<tr>
 							<td><label for="brief"><spring:message code="label.brief"/></label></td>
-							<td><form:textarea id="brief" path="newsEntity.contents.brief"/></td>
+							<td><form:textarea id="brief" path="newsEntity.contents.brief" placeholder=""/></td>
 							<td><form:errors path="newsEntity.contents.brief" cssClass="error"/></td>
 						</tr>
 						<tr>
 							<td><label for="content"><spring:message code="label.content"/></label></td>
-							<td><form:textarea id="content" path="newsEntity.contents.content"/></td>
+							<td><form:textarea id="content" path="newsEntity.contents.content" placeholder=""/></td>
 							<td><form:errors path="newsEntity.contents.content" cssClass="error"/></td>
 						</tr>
 					</table>

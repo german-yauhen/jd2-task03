@@ -74,10 +74,10 @@ public class NewsCommand {
             return "create-news";
         }
         try {
-            News flashyNews = newsView.getNewsEntity();
-            flashyNews.setDateOfPublication(Date.valueOf(newsView.getStringDateOfPublication()));
-            newsService.createNews(flashyNews);
-            newsView.setNewsEntity(flashyNews);
+            News actualNews = newsView.getNewsEntity();
+            actualNews.setDateOfPublication(Date.valueOf(newsView.getStringDateOfPublication()));
+            newsService.createNews(actualNews);
+            newsView.setNewsEntity(actualNews);
             logger.info(Constants.SUCCESS);
             return "news-view";
         } catch (ServiceException e) {
@@ -104,7 +104,7 @@ public class NewsCommand {
     public String processDeleteNews(@RequestParam("newsId") Integer newsId, Model model) {
         System.out.println("News to delete " + newsId);
         try {
-            newsService.deleteNews(newsId);
+            newsService.deleteNews(newsService.getNewsById(newsId));
             logger.info(Constants.SUCCESS);
             return "redirect:/news-list-context";
         } catch (ServiceException e) {
@@ -116,6 +116,6 @@ public class NewsCommand {
     @RequestMapping(value = "/edit-news", method = RequestMethod.POST)
     public String redirectToEditNews(@RequestParam("newsId") Integer newsId) {
         System.out.println("News to edit " + newsId);
-        return  "news-view";
+        return "news-view";
     }
 }

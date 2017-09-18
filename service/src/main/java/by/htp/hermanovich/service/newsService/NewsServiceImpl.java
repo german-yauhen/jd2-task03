@@ -58,13 +58,13 @@ public class NewsServiceImpl implements NewsService {
     /**
      * This method accepts instance of the News object and transmits it to method from Dao module
      * to delete it from the corresponding database table
-     * @param newsId an id of the News in the database table object which will be deleted
+     * @param news an instance of the News object which will be deleted
      * @throws ServiceException
      */
     @Override
-    public void deleteNews(Integer newsId) throws ServiceException {
+    public void deleteNews(News news) throws ServiceException {
         try {
-            newsDao.deleteNews(newsId);
+            newsDao.deleteNews(news);
         } catch (DaoException e) {
             logger.error(e);
             throw new ServiceException(Constants.SERVICE_DAO_ERROR, e);
