@@ -13,7 +13,7 @@
                 document.getElementById("regform").reset();
             }
             function submitSave() {
-                var query = confirm("Confirm the saving operation.");
+                var query = confirm("Confirm the editing operation.");
                 if (query) return true;
                 else return false;
             }
@@ -25,26 +25,27 @@
 		<jsp:include page="leftbar.jsp"/>
 		<div class="wrapper-main-content">
 			<div class="main-content">
-				<form:form id="regform" modelAttribute="newsView" action="process-news-form" method="post">
+				<form:form id="regform" modelAttribute="newsViewToEdit" action="process-news-edit-form" method="post">
 					<table>
+						<tr><form:hidden path="newsEntity.id" placeholder="${newsViewToEdit.newsEntity.id}"/></tr>
 						<tr>
 							<td><label for="title"><spring:message code="label.newstitle"/></label></td>
-							<td><form:input id="title" type="text" path="newsEntity.contents.title" /></td>
+							<td><form:input id="title" type="text" path="newsEntity.contents.title" placeholder="${newsViewToEdit.newsEntity.contents.title}" /></td>
 							<td><form:errors path="newsEntity.contents.title" cssClass="error"/></td>
 						</tr>
 						<tr>
 							<td><label for="date"><spring:message code="label.newsdate"/></label></td>
-							<td><form:input id="date" type="text" path="stringDateOfPublication" /></td>
+							<td><form:input id="date" type="text" path="stringDateOfPublication" placeholder="${newsViewToEdit.stringDateOfPublication}" /></td>
 							<td><form:errors path="stringDateOfPublication" cssClass="error"/></td>
 						</tr>
 						<tr>
 							<td><label for="brief"><spring:message code="label.brief"/></label></td>
-							<td><form:textarea id="brief" path="newsEntity.contents.brief" /></td>
+							<td><form:textarea id="brief" path="newsEntity.contents.brief" placeholder="${newsViewToEdit.newsEntity.contents.brief}" /></td>
 							<td><form:errors path="newsEntity.contents.brief" cssClass="error"/></td>
 						</tr>
 						<tr>
 							<td><label for="content"><spring:message code="label.content"/></label></td>
-							<td><form:textarea id="content" path="newsEntity.contents.content" /></td>
+							<td><form:textarea id="content" path="newsEntity.contents.content" placeholder="${newsViewToEdit.newsEntity.contents.content}" /></td>
 							<td><form:errors path="newsEntity.contents.content" cssClass="error"/></td>
 						</tr>
 					</table>

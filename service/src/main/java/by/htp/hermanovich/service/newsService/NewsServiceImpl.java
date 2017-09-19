@@ -85,4 +85,20 @@ public class NewsServiceImpl implements NewsService {
             throw new ServiceException(Constants.SERVICE_DAO_ERROR, e);
         }
     }
+
+    /**
+     * This method accepts instance of the News object and transmits it to method from Dao module
+     * to update it in the corresponding database table
+     * @param news an instance of the News object which will be updated
+     * @throws ServiceException
+     */
+    @Override
+    public void updateNews(News news) throws ServiceException {
+        try {
+            newsDao.updateNews(news);
+        } catch (DaoException e) {
+            logger.error(e);
+            throw new ServiceException(Constants.SERVICE_DAO_ERROR, e);
+        }
+    }
 }

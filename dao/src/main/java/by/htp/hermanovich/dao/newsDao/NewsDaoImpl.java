@@ -108,4 +108,26 @@ public class NewsDaoImpl implements NewsDao {
         logger.info(Constants.SUCCESS);
         return newsList;
     }
+
+    /**
+     * This method updates an instance of the News object in corresponding database table
+     * @param news an instance of the News object which will be updated
+     * @throws DaoException
+     */
+    @Override
+    public void updateNews(News news) throws DaoException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
+            session.saveOrUpdate(news);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e);
+            logger.error(Constants.EXECUTE_QUERY_TO_DB_ERROR + e);
+            session.getTransaction().rollback();
+            throw new DaoException(Constants.EXECUTE_QUERY_TO_DB_ERROR, e);
+        }
+        logger.info(Constants.SUCCESS);
+    }
 }

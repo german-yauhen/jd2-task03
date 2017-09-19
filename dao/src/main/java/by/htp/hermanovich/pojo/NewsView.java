@@ -18,19 +18,18 @@ import java.util.List;
 @Component
 public class NewsView {
 
-    @Autowired
     @Valid
     private News newsEntity;
     @NotNull(message = "The field must be filled")
     private String stringDateOfPublication;
-    private List<News> newsList;
     private List<Integer> taggedIds;
+    private List<News> newsList;
 
     public NewsView() {
     }
 
-    public static List<News> getTaggedNewsInstance() {
-        return new ArrayList<News>();
+    public static News getNewsInstance() {
+        return new News();
     }
 
     public static List<Integer> getTaggedIdsInstance() {
@@ -53,20 +52,20 @@ public class NewsView {
         this.stringDateOfPublication = stringDateOfPublication;
     }
 
-    public List<News> getNewsList() {
-        return newsList;
-    }
-
-    public void setNewsList(List<News> newsList) {
-        this.newsList = newsList;
-    }
-
     public List<Integer> getTaggedIds() {
         return taggedIds;
     }
 
     public void setTaggedIds(List<Integer> taggedIds) {
         this.taggedIds = taggedIds;
+    }
+
+    public List<News> getNewsList() {
+        return newsList;
+    }
+
+    public void setNewsList(List<News> newsList) {
+        this.newsList = newsList;
     }
 
     @Override
@@ -79,16 +78,16 @@ public class NewsView {
         if (newsEntity != null ? !newsEntity.equals(newsView.newsEntity) : newsView.newsEntity != null) return false;
         if (stringDateOfPublication != null ? !stringDateOfPublication.equals(newsView.stringDateOfPublication) : newsView.stringDateOfPublication != null)
             return false;
-        if (newsList != null ? !newsList.equals(newsView.newsList) : newsView.newsList != null) return false;
-        return taggedIds != null ? taggedIds.equals(newsView.taggedIds) : newsView.taggedIds == null;
+        if (taggedIds != null ? !taggedIds.equals(newsView.taggedIds) : newsView.taggedIds != null) return false;
+        return newsList != null ? newsList.equals(newsView.newsList) : newsView.newsList == null;
     }
 
     @Override
     public int hashCode() {
         int result = newsEntity != null ? newsEntity.hashCode() : 0;
         result = 31 * result + (stringDateOfPublication != null ? stringDateOfPublication.hashCode() : 0);
-        result = 31 * result + (newsList != null ? newsList.hashCode() : 0);
         result = 31 * result + (taggedIds != null ? taggedIds.hashCode() : 0);
+        result = 31 * result + (newsList != null ? newsList.hashCode() : 0);
         return result;
     }
 }

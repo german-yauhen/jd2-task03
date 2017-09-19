@@ -39,4 +39,11 @@ public interface NewsDao {
      * @throws DaoException
      */
     List<News> getAllNews() throws DaoException;
+
+    /**
+     * This method updates an instance of the News object in corresponding database table
+     * @param news an instance of the News object which will be updated
+     * @throws DaoException
+     */
+    void updateNews(News news) throws DaoException;
 }

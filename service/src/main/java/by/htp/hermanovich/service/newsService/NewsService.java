@@ -40,4 +40,12 @@ public interface NewsService {
      * @throws ServiceException
      */
     List<News> getAllNews() throws ServiceException;
+
+    /**
+     * This method accepts instance of the News object and transmits it to method from Dao module
+     * to update it in the corresponding database table
+     * @param news an instance of the News object which will be updated
+     * @throws ServiceException
+     */
+    void updateNews(News news) throws ServiceException;
 }

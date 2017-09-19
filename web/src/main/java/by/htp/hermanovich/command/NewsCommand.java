@@ -52,8 +52,10 @@ public class NewsCommand {
      */
     @RequestMapping(value = "/add-news-context", method = RequestMethod.GET)
     public String redirectToCreateNews(Model model) {
-        newsView.setNewsEntity(newsView.getNewsEntity());
+        newsView.setNewsEntity(NewsView.getNewsInstance());
+        newsView.setStringDateOfPublication(null);
         model.addAttribute("newsView", newsView);
+        logger.info(Constants.SUCCESS);
         return "create-news";
     }
 
@@ -101,7 +103,7 @@ public class NewsCommand {
     }
 
     @RequestMapping(value = "/delete-news", method = RequestMethod.POST)
-    public String processDeleteNews(@RequestParam("newsId") Integer newsId, Model model) {
+    public String processDeleteNews(@RequestParam("newsId") Integer newsId) {
         System.out.println("News to delete " + newsId);
         try {
             newsService.deleteNews(newsService.getNewsById(newsId));
@@ -113,9 +115,36 @@ public class NewsCommand {
         }
     }
 
-    @RequestMapping(value = "/edit-news", method = RequestMethod.POST)
-    public String redirectToEditNews(@RequestParam("newsId") Integer newsId) {
-        System.out.println("News to edit " + newsId);
-        return "news-view";
+    @RequestMapping(value = "/edit-news", method = RequestMethod.GET)
+    public String redirectToEditNews(@RequestParam("newsId") Integer newsId, Model model) {
+        try {
+            newsView.setNewsEntity(newsService.getNewsById(newsId));
+            newsView.setStringDateOfPublication(String.valueOf(newsView.getNewsEntity().getDateOfPublication()));
+            model.addAttribute("newsViewToEdit", newsView);
+            logger.info(Constants.SUCCESS);
+            return "edit-news";
+        } catch (ServiceException e) {
+            logger.error(e);
+            return "error-page";
+        }
+    }
+
+    @RequestMapping(value = "/process-news-edit-form", method = RequestMethod.POST)
+    public String processeEditNews(@Valid @ModelAttribute("newsViewToEdit") NewsView newsView, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            logger.info(Constants.FORM_FIELDS_ERROR);
+            return "edit-news";
+        }
+        try {
+            News updatedNews = newsView.getNewsEntity();
+            updatedNews.setDateOfPublication(Date.valueOf(newsView.getStringDateOfPublication()));
+            newsService.updateNews(updatedNews);
+            model.addAttribute("newsView", newsView);
+            logger.info(Constants.SUCCESS);
+            return "news-view";
+        } catch (ServiceException e) {
+            logger.error(e);
+            return "error-page";
+        }
     }
 }
