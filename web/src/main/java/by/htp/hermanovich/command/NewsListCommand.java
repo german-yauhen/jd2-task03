@@ -4,6 +4,7 @@ import by.htp.hermanovich.constant.Constants;
 import by.htp.hermanovich.pojo.NewsView;
 import by.htp.hermanovich.service.exception.ServiceException;
 import by.htp.hermanovich.service.newsService.NewsService;
+import by.htp.hermanovich.service.newsService.NewsServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

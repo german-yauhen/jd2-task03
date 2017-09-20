@@ -8,6 +8,8 @@ import by.htp.hermanovich.service.exception.ServiceException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
@@ -30,6 +32,7 @@ public class NewsServiceImpl implements NewsService {
      * @throws ServiceException
      */
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public News getNewsById(Integer id) throws ServiceException {
         try {
             return newsDao.getNewsById(id);
@@ -77,6 +80,7 @@ public class NewsServiceImpl implements NewsService {
      * @throws ServiceException
      */
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<News> getAllNews() throws ServiceException {
         try {
             return newsDao.getAllNews();

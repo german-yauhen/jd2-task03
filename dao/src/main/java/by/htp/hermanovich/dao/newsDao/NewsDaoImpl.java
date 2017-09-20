@@ -3,9 +3,10 @@ package by.htp.hermanovich.dao.newsDao;
 import by.htp.hermanovich.constant.Constants;
 import by.htp.hermanovich.dao.exception.DaoException;
 import by.htp.hermanovich.pojo.News;
-import by.htp.hermanovich.util.HibernateUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class NewsDaoImpl implements NewsDao {
 
     private static final Logger logger = Logger.getLogger(NewsDaoImpl.class);
 
+    @Autowired
+    SessionFactory sessionFactory;
+
     /**
      This method reads and returns instance of the News object from corresponding database table
      * @param id an unigue identifier of the object
@@ -31,7 +35,7 @@ public class NewsDaoImpl implements NewsDao {
         Session session = null;
         News news = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = sessionFactory.getCurrentSession();
             session.beginTransaction();
             news = session.get(News.class, id);
             session.getTransaction().commit();
@@ -53,7 +57,7 @@ public class NewsDaoImpl implements NewsDao {
     public void saveNews(News news) throws DaoException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = sessionFactory.getCurrentSession();
             session.beginTransaction();
             session.save(news);
             session.getTransaction().commit();
@@ -74,7 +78,7 @@ public class NewsDaoImpl implements NewsDao {
     public void deleteNews(News news) throws DaoException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = sessionFactory.getCurrentSession();
             session.beginTransaction();
             session.delete(news);
             session.getTransaction().commit();
@@ -96,7 +100,7 @@ public class NewsDaoImpl implements NewsDao {
         Session session = null;
         List<News> newsList = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = sessionFactory.getCurrentSession();
             session.beginTransaction();
             newsList = session.createQuery("from News order by dateOfPublication").getResultList();
             session.getTransaction().commit();
@@ -118,7 +122,7 @@ public class NewsDaoImpl implements NewsDao {
     public void updateNews(News news) throws DaoException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = sessionFactory.getCurrentSession();
             session.beginTransaction();
             session.saveOrUpdate(news);
             session.getTransaction().commit();
