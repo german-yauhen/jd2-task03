@@ -130,7 +130,7 @@ public class NewsCommand {
     }
 
     @RequestMapping(value = "/process-news-edit-form", method = RequestMethod.POST)
-    public String processeEditNews(@Valid @ModelAttribute("newsViewToEdit") NewsView newsView, BindingResult bindingResult, Model model) {
+    public String processEditNews(@Valid @ModelAttribute("newsViewToEdit") NewsView newsView, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             logger.info(Constants.FORM_FIELDS_ERROR);
             return "edit-news";

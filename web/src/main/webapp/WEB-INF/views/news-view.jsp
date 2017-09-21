@@ -47,7 +47,7 @@
 							<spring:message code="label.btndelete"/>
 						</button>
 					</form>
-					<form action="edit-news" method="get">
+					<form action="edit-news" method="post">
 						<input type="hidden" name="newsId" value="${newsView.newsEntity.id}" />
 						<button type="submit" onclick="return confirmUpdateDelete()">
 							<spring:message code="label.btnedit"/>

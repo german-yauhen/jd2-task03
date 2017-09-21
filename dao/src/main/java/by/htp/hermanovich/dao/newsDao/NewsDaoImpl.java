@@ -3,6 +3,7 @@ package by.htp.hermanovich.dao.newsDao;
 import by.htp.hermanovich.constant.Constants;
 import by.htp.hermanovich.dao.exception.DaoException;
 import by.htp.hermanovich.pojo.News;
+import by.htp.hermanovich.util.HibernateUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,33 +20,30 @@ import java.util.List;
 @Repository("newsDao")
 public class NewsDaoImpl implements NewsDao {
 
+    private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private Session session;
     private static final Logger logger = Logger.getLogger(NewsDaoImpl.class);
 
-    @Autowired
-    SessionFactory sessionFactory;
-
     /**
-     This method reads and returns instance of the News object from corresponding database table
+     * This method reads and returns instance of the News object from corresponding database table
      * @param id an unigue identifier of the object
      * @return an instance of News object
      * @throws DaoException
      */
     @Override
     public News getNewsById(Integer id) throws DaoException {
-        Session session = null;
-        News news = null;
         try {
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();
-            news = session.get(News.class, id);
+            News news = session.get(News.class, id);
             session.getTransaction().commit();
+            logger.info(Constants.SUCCESS);
+            return news;
         } catch (Exception e) {
             logger.error(Constants.EXECUTE_QUERY_TO_DB_ERROR + e);
             session.getTransaction().rollback();
             throw new DaoException(Constants.EXECUTE_QUERY_TO_DB_ERROR, e);
         }
-        logger.info(Constants.SUCCESS);
-        return news;
     }
 
     /**
@@ -55,7 +53,6 @@ public class NewsDaoImpl implements NewsDao {
      */
     @Override
     public void saveNews(News news) throws DaoException {
-        Session session = null;
         try {
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();
@@ -76,7 +73,6 @@ public class NewsDaoImpl implements NewsDao {
      */
     @Override
     public void deleteNews(News news) throws DaoException {
-        Session session = null;
         try {
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();
@@ -97,20 +93,18 @@ public class NewsDaoImpl implements NewsDao {
      */
     @Override
     public List<News> getAllNews() throws DaoException {
-        Session session = null;
-        List<News> newsList = null;
         try {
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();
-            newsList = session.createQuery("from News order by dateOfPublication").getResultList();
+            List<News> newsList = session.createQuery("from News order by dateOfPublication").getResultList();
             session.getTransaction().commit();
+            logger.info(Constants.SUCCESS);
+            return newsList;
         } catch (Exception e) {
             logger.error(Constants.EXECUTE_QUERY_TO_DB_ERROR + e);
             session.getTransaction().rollback();
             throw new DaoException(Constants.EXECUTE_QUERY_TO_DB_ERROR, e);
         }
-        logger.info(Constants.SUCCESS);
-        return newsList;
     }
 
     /**
@@ -120,7 +114,6 @@ public class NewsDaoImpl implements NewsDao {
      */
     @Override
     public void updateNews(News news) throws DaoException {
-        Session session = null;
         try {
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();

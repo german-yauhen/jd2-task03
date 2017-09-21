@@ -4,7 +4,6 @@ import by.htp.hermanovich.constant.Constants;
 import by.htp.hermanovich.pojo.NewsView;
 import by.htp.hermanovich.service.exception.ServiceException;
 import by.htp.hermanovich.service.newsService.NewsService;
-import by.htp.hermanovich.service.newsService.NewsServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,11 +53,11 @@ public class NewsListCommand {
      * The method receives a special data transfer object (DTO) received from the request, fetches
      * a list of <i>news</i> objects as a filed of DTO and renders the list to the service module
      * to delete the news from the database table
-     * @param model     - information which will be represented in the browser
+     * @param newsView - an entity of DTO which contains all necessary information
      * @return          a name of view of a page associates with the list of news
      */
-    @RequestMapping(value = "/delete-news-list", method = RequestMethod.GET)
-    public String processDeleteNewsList(NewsView newsView, Model model) {
+    @RequestMapping(value = "/delete-news-list", method = RequestMethod.POST)
+    public String processDeleteNewsList(NewsView newsView) {
         try {
             for (Integer newsId : newsView.getTaggedIds()) {
                 newsService.deleteNews(newsService.getNewsById(newsId));
