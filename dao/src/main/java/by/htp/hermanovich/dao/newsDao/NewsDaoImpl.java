@@ -4,10 +4,8 @@ import by.htp.hermanovich.constant.Constants;
 import by.htp.hermanovich.dao.exception.DaoException;
 import by.htp.hermanovich.pojo.News;
 import by.htp.hermanovich.util.HibernateUtil;
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -20,9 +18,9 @@ import java.util.List;
 @Repository("newsDao")
 public class NewsDaoImpl implements NewsDao {
 
+    // TODO Resolve, DI
     private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     private Session session;
-    private static final Logger logger = Logger.getLogger(NewsDaoImpl.class);
 
     /**
      * This method reads and returns instance of the News object from corresponding database table
@@ -37,10 +35,8 @@ public class NewsDaoImpl implements NewsDao {
             session.beginTransaction();
             News news = session.get(News.class, id);
             session.getTransaction().commit();
-            logger.info(Constants.SUCCESS);
             return news;
         } catch (Exception e) {
-            logger.error(Constants.EXECUTE_QUERY_TO_DB_ERROR + e);
             session.getTransaction().rollback();
             throw new DaoException(Constants.EXECUTE_QUERY_TO_DB_ERROR, e);
         }
@@ -59,11 +55,9 @@ public class NewsDaoImpl implements NewsDao {
             session.save(news);
             session.getTransaction().commit();
         } catch (Exception e) {
-            logger.error(Constants.EXECUTE_QUERY_TO_DB_ERROR + e);
             session.getTransaction().rollback();
             throw new DaoException(Constants.EXECUTE_QUERY_TO_DB_ERROR, e);
         }
-        logger.info(Constants.SUCCESS);
     }
 
     /**
@@ -79,11 +73,9 @@ public class NewsDaoImpl implements NewsDao {
             session.delete(news);
             session.getTransaction().commit();
         } catch (Exception e) {
-            logger.error(Constants.EXECUTE_QUERY_TO_DB_ERROR + e);
             session.getTransaction().rollback();
             throw new DaoException(Constants.EXECUTE_QUERY_TO_DB_ERROR, e);
         }
-        logger.info(Constants.SUCCESS);
     }
 
     /**
@@ -98,10 +90,8 @@ public class NewsDaoImpl implements NewsDao {
             session.beginTransaction();
             List<News> newsList = session.createQuery("from News order by dateOfPublication").getResultList();
             session.getTransaction().commit();
-            logger.info(Constants.SUCCESS);
             return newsList;
         } catch (Exception e) {
-            logger.error(Constants.EXECUTE_QUERY_TO_DB_ERROR + e);
             session.getTransaction().rollback();
             throw new DaoException(Constants.EXECUTE_QUERY_TO_DB_ERROR, e);
         }
@@ -120,11 +110,8 @@ public class NewsDaoImpl implements NewsDao {
             session.saveOrUpdate(news);
             session.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println(e);
-            logger.error(Constants.EXECUTE_QUERY_TO_DB_ERROR + e);
             session.getTransaction().rollback();
             throw new DaoException(Constants.EXECUTE_QUERY_TO_DB_ERROR, e);
         }
-        logger.info(Constants.SUCCESS);
     }
 }

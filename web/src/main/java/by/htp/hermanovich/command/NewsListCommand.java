@@ -1,10 +1,8 @@
 package by.htp.hermanovich.command;
 
-import by.htp.hermanovich.constant.Constants;
 import by.htp.hermanovich.pojo.NewsView;
 import by.htp.hermanovich.service.exception.ServiceException;
 import by.htp.hermanovich.service.newsService.NewsService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +24,6 @@ public class NewsListCommand {
     @Autowired
     private NewsView newsView;
 
-    private static final Logger logger = Logger.getLogger(NewsListCommand.class);
-
     /**
      * This method describes actions to retrieve a archives of the news,
      * locates it to the model instance as a list and represents it on the corresponding page
@@ -40,10 +36,8 @@ public class NewsListCommand {
             newsView.setNewsList(newsService.getAllNews());
             newsView.setTaggedIds(NewsView.getTaggedIdsInstance());
             model.addAttribute("newsView", newsView);
-            logger.info(Constants.SUCCESS);
             return "news-list-page";
         } catch (ServiceException e) {
-            logger.error(e);
             return "error-page";
         }
     }
@@ -62,10 +56,8 @@ public class NewsListCommand {
             for (Integer newsId : newsView.getTaggedIds()) {
                 newsService.deleteNews(newsService.getNewsById(newsId));
             }
-            logger.info(Constants.SUCCESS);
             return  "redirect:/news-list-context";
         } catch (ServiceException e) {
-            logger.error(e);
             return "error-page";
         }
     }
