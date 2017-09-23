@@ -1,26 +1,27 @@
-package by.htp.hermanovich.service.aspect;
+package by.htp.hermanovich.aspect;
 
 import by.htp.hermanovich.constant.Constants;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Pointcut;
 
 /**
  * This class describe util methods which are used to perform
- * the logging operation in service module of the application
- * @author Hermanovich Yauheni
+ * the logging operation in web module of the application
+ * @author  Hermanovich Yauheni
  */
 @Aspect
-public class LoggerServiceAspect {
+public class LoggerAspect {
 
-    private static Logger logger;
+    private final Logger loggerController = Logger.getLogger(this.getClass());
 
     /**
      * This method describes a predicate that matches join points of the Controller class
      * Advice (action taken by an aspect at a particular join point) is associated with
      * a pointcut expression and runs at any join point matched by the pointcut
      */
-    @Pointcut("within(by.htp.hermanovich.service.newsService.NewsServiceImpl)")
+    @Pointcut("within(by.htp.hermanovich.command.* || by.htp.hermanovich.service.newsService.* || by.htp.hermanovich.dao.newsDao.*) && !execution(void by.htp.hermanovich.command.NewsCommand.initBinder(..))")
     public void executeAspect() {
     }
 
@@ -32,8 +33,8 @@ public class LoggerServiceAspect {
      */
     @Before("executeAspect()")
     public void beforeExecution(JoinPoint joinPoint) {
-        logger = Logger.getLogger(joinPoint.getSignature().getDeclaringType());
-        logger.info(Constants.EXEC_METHOD + joinPoint.getSignature().getName());
+        loggerController.info(Constants.EXEC_METHOD + joinPoint.getSignature().getDeclaringTypeName()
+                + Constants.DELIMETER + joinPoint.getSignature().getName());
     }
 
     /**
@@ -42,10 +43,11 @@ public class LoggerServiceAspect {
      * of the execution in the end of the pointcut
      ** @param joinPoint  - a point during the execution of a program
      */
-    @After("executeAspect()")
+    @AfterReturning("executeAspect()")
     public void afterReturning(JoinPoint joinPoint) {
-        logger = Logger.getLogger(joinPoint.getSignature().getDeclaringType());
-        logger.info(joinPoint.getSignature().getName() + Constants.DELIMETER + Constants.SUCCESS);
+        loggerController.info(joinPoint.getSignature().getDeclaringType().getSimpleName()
+                + Constants.DELIMETER + joinPoint.getSignature().getName()
+                + Constants.DELIMETER + Constants.SUCCESS);
     }
 
     /**
@@ -54,7 +56,7 @@ public class LoggerServiceAspect {
      */
     @AfterThrowing("executeAspect()")
     public void afterThrowing(JoinPoint joinPoint) {
-        logger = Logger.getLogger(joinPoint.getSignature().getDeclaringType());
-        logger.error(Constants.SERVICE_DAO_ERROR);
+        loggerController.error(joinPoint.getSignature().getDeclaringType().getSimpleName()
+                + Constants.DELIMETER + joinPoint.getSignature().getName() + Constants.DELIMETER + Constants.SERVICE_EXCEPTION);
     }
 }

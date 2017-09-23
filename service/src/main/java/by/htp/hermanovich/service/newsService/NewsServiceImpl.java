@@ -7,7 +7,6 @@ import by.htp.hermanovich.pojo.News;
 import by.htp.hermanovich.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
@@ -72,7 +71,6 @@ public class NewsServiceImpl implements NewsService {
      * @throws ServiceException
      */
     @Override
-    @Transactional(readOnly = true)
     public List<News> getAllNews() throws ServiceException {
         try {
             return newsDao.getAllNews();
