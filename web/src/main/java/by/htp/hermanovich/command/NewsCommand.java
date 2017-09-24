@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.RequestContextUtils;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.sql.Date;
 
@@ -77,6 +81,21 @@ public class NewsCommand {
         } catch (ServiceException e) {
             return "error-page";
         }
+    }
+
+    /**
+     * This method describes actions meant for change the display language of the page.
+     * Update action with required language will be executed as a result of method execution.
+     * @param language      parameter corresponding to the required page display language
+     * @param request       an instance of HttpServletRequest
+     * @param response      an instance of HttpServletResponse
+     * @return              a string value of the required page,
+     *                      in this case the redirect command will be executed
+     */
+    @RequestMapping(value = "/language", method = RequestMethod.POST)
+    public String changeLanguage(@RequestParam("language") String language, HttpServletRequest request, HttpServletResponse response) {
+        RequestContextUtils.getLocaleResolver(request).setLocale(request, response, StringUtils.parseLocaleString(language));
+        return "redirect:" + request.getHeader("Referer");
     }
 
     @RequestMapping(value = "/view-news", method = RequestMethod.GET)

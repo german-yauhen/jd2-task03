@@ -52,6 +52,7 @@
 		<property name="defaultLocale" value="en"/>
 	</bean>
 
+	<!--
 	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 		<property name="paramName" value="language" />
 	</bean>
@@ -61,4 +62,5 @@
 			<property name="paramName" value="language" />
 		</bean>
 	</mvc:interceptors>
+	-->
 </beans>

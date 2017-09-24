@@ -20,7 +20,10 @@ public class LoggerAspect {
      * Advice (action taken by an aspect at a particular join point) is associated with
      * a pointcut expression and runs at any join point matched by the pointcut.
      */
-    @Pointcut("within(by.htp.hermanovich.command.* || by.htp.hermanovich.service.newsService.* || by.htp.hermanovich.dao.newsDao.*) && !execution(void by.htp.hermanovich.command.NewsCommand.initBinder(..))")
+    @Pointcut("within(by.htp.hermanovich.command.*" +
+                    " || by.htp.hermanovich.service.newsService.*" +
+                    " || by.htp.hermanovich.dao.newsDao.*)" +
+                    " && !execution(void by.htp.hermanovich.command.NewsCommand.initBinder(..))")
     public void executeAspect() {
     }
 
