@@ -6,8 +6,7 @@
 <html>
 	<head>
 		<title>Create News Context</title>
-		<spring:url value="/resources/css/main.css" var="mainCss" />
-		<link rel="stylesheet" href="${mainCss}" />
+		<link rel="stylesheet" href="/resources/css/main.css" />
 		<script>
             function resetForm() {
                 document.getElementById("regform").reset();
@@ -25,7 +24,7 @@
 		<jsp:include page="leftbar.jsp"/>
 		<div class="wrapper-main-content">
 			<div class="main-content">
-				<form:form id="regform" modelAttribute="newsViewToEdit" action="process-news-edit-form" method="post">
+				<form:form id="editform" modelAttribute="newsViewToEdit" action="process-news-edit-form" method="post">
 					<table>
 						<tr><form:hidden path="newsEntity.id" placeholder="${newsViewToEdit.newsEntity.id}"/></tr>
 						<tr>
@@ -50,7 +49,7 @@
 						</tr>
 					</table>
 				</form:form>
-				<button form="regform" type="submit" onclick="return submitSave()"><spring:message code="label.btnsave"/></button>
+				<button form="editform" type="submit" onclick="return submitSave()"><spring:message code="label.btnsave"/></button>
 				<form:form action="news-list-context" method="get">
 					<button type="submit" onclick="resetForm()"><spring:message code="label.btncancel"/></button>
 				</form:form>

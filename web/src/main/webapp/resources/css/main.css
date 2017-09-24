@@ -1,6 +1,6 @@
-h1 {
-    font-style: oblique;
-    font-size: 20px;
+html, body {
+    font-family: Verdana, sans-serif;
+    font-size: 15px;
 }
 header {
     margin-bottom: 5px;
@@ -60,6 +60,7 @@ footer {
 .wrapper-leftbar-content {
     background-color: lightblue;
     width: 20%;
+    height: 50%;
     display: inline-block;
     border-radius: 5px;
     margin-right: 5px;
@@ -77,25 +78,47 @@ footer {
     font-size: 14px;
 }
 .main-content {
-    background-color: cadetblue;
     padding: 15px;
+    height: inherit;
 }
 .news-element {
-    background-color: gainsboro;
+    border-style: groove;
     padding: 5px 10px;
+    margin-bottom: 5px;
 }
 .leftbar-element {
 
 }
+.wrapper-title-date {
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
 .news-title-elem {
-    color: firebrick;
+    font-weight: 600;
+    display: inline-block;
 }
 .news-date-elem {
-    color: forestgreen;
+    display: inline-block;
+    float: right;
+    margin-right: 15px;
 }
 .news-brief-elem {
-    color: chocolate;
+    color: firebrick;
+}
+.wrapper-action-elements {
+    display: flex;
+    justify-content: flex-end;
+    text-align: justify;
 }
 .link-elem {
     color: midnightblue;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.checkbox-elem {
+    display: inline-block;
+}
+.button-delete-elem {
+    float: right;
 }

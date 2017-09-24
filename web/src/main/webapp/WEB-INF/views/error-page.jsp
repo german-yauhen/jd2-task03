@@ -3,8 +3,7 @@
 <html>
 <head>
 	<title><spring:message code="label.errorpagename"/></title>
-	<spring:url value="/resources/css/main.css" var="mainCss" />
-	<link rel="stylesheet" href="${mainCss}" />
+	<link rel="stylesheet" href="/resources/css/main.css" />
 </head>
 	<body>
 		<jsp:include page="header.jsp"/>

@@ -10,7 +10,7 @@
 		<property name="connection.username">root</property>
 		<property name="connection.password">doit</property>
 		<!-- JDBC connection pool properties -->
-		<property name="connection.pool_size">3</property>
+		<property name="connection.pool_size">1</property>
 		<!-- SQL dialect properties -->
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<!-- Display the SQL to console -->

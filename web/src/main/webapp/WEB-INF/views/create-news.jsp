@@ -6,8 +6,7 @@
 <html>
 	<head>
 		<title>Create News Context</title>
-		<spring:url value="/resources/css/main.css" var="mainCss" />
-		<link rel="stylesheet" href="${mainCss}" />
+		<link rel="stylesheet" href="/resources/css/main.css" />
 		<script>
             function resetForm() {
                 document.getElementById("regform").reset();

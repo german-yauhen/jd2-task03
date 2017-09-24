@@ -4,8 +4,7 @@
 <html>
 	<head>
 		<title><spring:message code="label.mainpagename" /></title>
-		<spring:url value="/resources/css/main.css" var="mainCss" />
-		<link href="${mainCss}" rel="stylesheet" />
+		<link rel="stylesheet" href="/resources/css/main.css" />
 	</head>
 	<body>
 	<jsp:include page="header.jsp"/>
