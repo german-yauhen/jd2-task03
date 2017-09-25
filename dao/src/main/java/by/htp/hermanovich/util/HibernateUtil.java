@@ -4,6 +4,7 @@ import by.htp.hermanovich.constant.Constants;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.context.annotation.Bean;
 
 /**
  * This class describes actions to create the Hibernate session factory instance.
@@ -12,7 +13,9 @@ import org.hibernate.cfg.Configuration;
  * Configuration class is used to load Hibernate configuration from hibernate.cfg.xml file.
  * @author Hermanovich Yauheni
  */
+@org.springframework.context.annotation.Configuration
 public class HibernateUtil {
+
     private static final Logger logger = Logger.getLogger(HibernateUtil.class);
     private static final SessionFactory sessionFactory;
 
@@ -29,6 +32,7 @@ public class HibernateUtil {
      * This method gets Hibernate session factory that was initialized at application startup.
      * @return Hibernate session factory
      */
+    @Bean
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }

@@ -10,6 +10,4 @@
 	<context:annotation-config/>
 	<context:component-scan base-package="by.htp.hermanovich.dao"/>
 	<context:component-scan base-package="by.htp.hermanovich.pojo"/>
-
-	<!--<bean id="sessionFactory" class="by.htp.hermanovich.util.HibernateUtil" factory-method="getSessionFactory"/>-->
 </beans>

@@ -19,8 +19,8 @@
 	<context:component-scan base-package="by.htp.hermanovich.dao"/>
 	<context:component-scan base-package="by.htp.hermanovich.util"/>
 	<context:component-scan base-package="by.htp.hermanovich.service"/>
-	<context:component-scan base-package="by.htp.hermanovich.command" />
-	<context:component-scan base-package="by.htp.hermanovich.aspect" />
+	<context:component-scan base-package="by.htp.hermanovich.command"/>
+	<context:component-scan base-package="by.htp.hermanovich.aspect"/>
 
 	<!-- Add support for conversion formatting and validation support -->
 	<mvc:annotation-driven />
