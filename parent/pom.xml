@@ -5,8 +5,9 @@
 						http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>by.htp.hermanovich</groupId>
-	<artifactId>parent-module</artifactId>
+	<artifactId>news-parent</artifactId>
 	<version>1.0-SNAPSHOT</version>
+	<name>news-parent</name>
 	<modules>
 		<module>../service</module>
 		<module>../dao</module>
@@ -14,7 +15,6 @@
 	</modules>
 	<packaging>pom</packaging>
 	<build>
-		<finalName>NewsPortal</finalName>
 		<!-- Tomcat Maven plugin -->
 		<plugins>
 			<plugin>

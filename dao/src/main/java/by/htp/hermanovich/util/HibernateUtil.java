@@ -4,6 +4,7 @@ import by.htp.hermanovich.constant.Constants;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -32,7 +33,7 @@ public class HibernateUtil {
      * This method gets Hibernate session factory that was initialized at application startup.
      * @return Hibernate session factory
      */
-    @Bean
+    @Bean(value = "sessionFactory")
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }

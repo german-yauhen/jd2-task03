@@ -4,13 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<groupId>by.htp.hermanovich</groupId>
-		<artifactId>parent-module</artifactId>
+		<artifactId>news-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>web-module</artifactId>
+	<artifactId>news-web</artifactId>
 	<packaging>war</packaging>
+	<name>news-web</name>
 	<dependencies>
 		<!-- Servlet API for compile -->
 		<dependency>
@@ -45,7 +46,7 @@
 		<!-- Service module -->
 		<dependency>
 			<groupId>by.htp.hermanovich</groupId>
-			<artifactId>service-module</artifactId>
+			<artifactId>news-service</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

@@ -4,13 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>by.htp.hermanovich</groupId>
-		<artifactId>parent-module</artifactId>
+		<artifactId>news-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>dao-module</artifactId>
+	<artifactId>news-dao</artifactId>
 	<packaging>jar</packaging>
+	<name>news-dao</name>
 	<dependencies>
 		<!-- Hibernate validator -->
 		<dependency>

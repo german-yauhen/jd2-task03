@@ -10,4 +10,5 @@
 	<context:annotation-config/>
 	<context:component-scan base-package="by.htp.hermanovich.dao"/>
 	<context:component-scan base-package="by.htp.hermanovich.pojo"/>
+	<context:component-scan base-package="by.htp.hermanovich.util"/>
 </beans>

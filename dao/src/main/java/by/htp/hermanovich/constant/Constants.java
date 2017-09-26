@@ -5,7 +5,7 @@ package by.htp.hermanovich.constant;
  * @author  Hermanovich Yauheni
  */
 public class Constants {
-    public static final String SUCCESS = "Execution completed successfully.";
+    public static final String SUCCESS = "Execution has been completed.";
     public static final String HIBERNATE_EXCEPTION = "Hibernate exception was generated: ";
     public static final String INIT_SESSION_FACTORY_ERROR = "Initial SessionFactory creation failed. ";
     public static final String EXECUTE_QUERY_TO_DB_ERROR = "An error was occurred while executing the query to the database: ";

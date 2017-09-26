@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * This class provides and describes actions/methods meant
@@ -31,7 +32,7 @@ public class NewsListCommand {
      * @return a name of view of a page associates with the list of news
      */
     @RequestMapping(value = "/news-list-context", method = RequestMethod.GET)
-    public String getNewsList(Model model) {
+    public String getNewsList(Model model, HttpServletRequest request) {
         try {
             newsView.setNewsList(newsService.getAllNews());
             newsView.setTaggedIds(NewsView.getTaggedIdsInstance());
@@ -51,7 +52,7 @@ public class NewsListCommand {
      * @return          a name of view of a page associates with the list of news
      */
     @RequestMapping(value = "/delete-news-list", method = RequestMethod.POST)
-    public String processDeleteNewsList(NewsView newsView) {
+    public String processDeleteNewsList(NewsView newsView, HttpServletRequest request) {
         try {
             for (Integer newsId : newsView.getTaggedIds()) {
                 newsService.deleteNews(newsService.getNewsById(newsId));
