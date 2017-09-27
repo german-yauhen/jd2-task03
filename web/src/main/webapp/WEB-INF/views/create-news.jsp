@@ -24,7 +24,7 @@
 		<jsp:include page="leftbar.jsp"/>
 		<div class="wrapper-main-content">
 			<div class="main-content">
-				<form:form id="regform" modelAttribute="newsView" action="process-news-form" method="post">
+				<form:form id="regform" modelAttribute="newsView" action="process-create-news" method="post">
 					<table>
 						<tr>
 							<td><label for="title"><spring:message code="label.newstitle"/></label></td>

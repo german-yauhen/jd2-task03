@@ -79,11 +79,12 @@ public class NewsCommand {
      * This method describes actions meant for process information about news instance stored
      * into the request object and to insert flashy news into the database table.
      * Also method implements a validation this stored data.
+     * The method uses Post-Get-Redirect pattern approach to protect from the re-sending the form.
      * @param newsView          an entity of DTO which contains all necessary information
      * @param bindingResult     an object holds the results of validation
      * @return                  a name of view of a page associates with overview of the create-news form
      */
-    @RequestMapping(value = "/process-news-form", method = RequestMethod.POST)
+    @RequestMapping(value = "/process-create-news", method = RequestMethod.POST)
     public String processCreateNews(@Valid @ModelAttribute("newsView") NewsView newsView, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "create-news";
@@ -93,7 +94,8 @@ public class NewsCommand {
             actualNews.setDateOfPublication(Date.valueOf(newsView.getStringDateOfPublication()));
             newsService.createNews(actualNews);
             newsView.setNewsEntity(actualNews);
-            return "news-view";
+            System.out.println(actualNews);
+            return "redirect:/view-news?newsId=" + actualNews.getId();
         } catch (ServiceException e) {
             return "error-page";
         }
@@ -161,6 +163,7 @@ public class NewsCommand {
      * The method receives an id of a news from the request object as an argument of the method, transmits
      * the id value to service module where corresponding news object will be requested according
      * to the id value. The news object is transmitted into the NewsView object in the Model.
+     * The method uses Post-Get-Redirect pattern approach to protect from the re-sending the form.
      * @param newsView          an entity of DTO which contains all necessary information
      * @param bindingResult     an object holds the results of validation
      * @param model             information which will be represented in the browser
@@ -177,7 +180,7 @@ public class NewsCommand {
             updatedNews.setDateOfPublication(Date.valueOf(newsView.getStringDateOfPublication()));
             newsService.updateNews(updatedNews);
             model.addAttribute("newsView", newsView);
-            return "news-view";
+            return "redirect:/view-news?newsId=" + updatedNews.getId();
         } catch (ServiceException e) {
             return "error-page";
         }

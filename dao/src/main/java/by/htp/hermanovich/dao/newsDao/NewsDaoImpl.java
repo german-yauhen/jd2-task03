@@ -53,6 +53,7 @@ public class NewsDaoImpl implements NewsDao {
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();
             session.save(news);
+            System.out.println(news);
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
