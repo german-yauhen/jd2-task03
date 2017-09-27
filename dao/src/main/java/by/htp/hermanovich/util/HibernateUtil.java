@@ -4,7 +4,6 @@ import by.htp.hermanovich.constant.Constants;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -22,7 +21,7 @@ public class HibernateUtil {
 
     static {
         try {
-            sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+            sessionFactory = new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
         } catch (Throwable exc) {
             logger.error(Constants.INIT_SESSION_FACTORY_ERROR + Constants.HIBERNATE_EXCEPTION + exc);
             throw new ExceptionInInitializerError(exc);

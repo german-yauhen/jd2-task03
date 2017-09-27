@@ -48,10 +48,18 @@
 						</tr>
 					</table>
 				</form:form>
-				<button form="regform" type="submit" onclick="return submitSave()"><spring:message code="label.btnsave"/></button>
-				<form:form action="news-list-context" method="get">
-					<button type="submit" onclick="resetForm()"><spring:message code="label.btncancel"/></button>
-				</form:form>
+				<div class="wrapper-button-elements">
+					<div class="button-elem">
+						<button form="regform" type="submit" onclick="return submitSave()">
+							<spring:message code="label.btnsave"/>
+						</button>
+					</div>
+					<div class="button-elem">
+						<form:form action="news-list-context" method="get">
+							<button type="submit" onclick="resetForm()"><spring:message code="label.btncancel"/></button>
+						</form:form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

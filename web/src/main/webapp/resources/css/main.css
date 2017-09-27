@@ -10,6 +10,17 @@ footer {
     margin-bottom: 5px;
     margin-top: 5px;
 }
+table {
+    border-spacing: 20px 5px;
+}
+td {
+    vertical-align: top;
+}
+textarea {
+    overflow-y: scroll;
+    height: 70px;
+    width: 300px;
+}
 .error {
     font-style: oblique;
     font-size: 12px;
@@ -129,4 +140,14 @@ footer {
     text-decoration: underline;
     font-family: inherit;
     font-size: 13px;
+}
+.wrapper-button-elements {
+    display: flex;
+    justify-content: flex-end;
+    text-align: justify;
+}
+.button-elem {
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
 }

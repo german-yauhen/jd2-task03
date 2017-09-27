@@ -7,7 +7,6 @@ import by.htp.hermanovich.pojo.News;
 import by.htp.hermanovich.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
@@ -16,7 +15,6 @@ import java.util.List;
  * @author Hermanovich Yauheni
  */
 @Service("newsService")
-@Transactional
 public class NewsServiceImpl implements NewsService {
 
     @Autowired

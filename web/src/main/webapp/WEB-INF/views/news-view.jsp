@@ -41,18 +41,24 @@
 							<td>${newsView.newsEntity.contents.content}</td>
 						</tr>
 					</table>
-					<form action="delete-news" method="post">
-						<input type="hidden" name="newsId" value="${newsView.newsEntity.id}" />
-						<button type="submit" onclick="return confirmUpdateDelete()">
-							<spring:message code="label.btndelete"/>
-						</button>
-					</form>
-					<form action="edit-news" method="get">
-						<input type="hidden" name="newsId" value="${newsView.newsEntity.id}" />
-						<button type="submit" onclick="return confirmUpdateDelete()">
-							<spring:message code="label.btnedit"/>
-						</button>
-					</form>
+					<div class="wrapper-button-elements">
+						<div class="button-elem">
+							<form action="delete-news" method="post">
+								<input type="hidden" name="newsId" value="${newsView.newsEntity.id}" />
+								<button type="submit" onclick="return confirmUpdateDelete()">
+									<spring:message code="label.btndelete"/>
+								</button>
+							</form>
+						</div>
+						<div class="button-elem">
+							<form action="edit-news" method="get">
+								<input type="hidden" name="newsId" value="${newsView.newsEntity.id}" />
+								<button type="submit" onclick="return confirmUpdateDelete()">
+									<spring:message code="label.btnedit"/>
+								</button>
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
