@@ -28,7 +28,7 @@ public class NewsDaoImplTest {
         contentsExpected.setBrief("TestNewsBrief");
         contentsExpected.setContent("TestNewsContent");
         newsExpected = new News();
-        newsExpected.setDateOfPublication(Date.valueOf("2017-09-20"));
+        newsExpected.setDateOfPublication(Date.valueOf("2017-09-28"));
         newsExpected.setContents(contentsExpected);
     }
 

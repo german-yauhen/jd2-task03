@@ -3,9 +3,9 @@ package by.htp.hermanovich.dao.newsDao;
 import by.htp.hermanovich.constant.Constants;
 import by.htp.hermanovich.dao.exception.DaoException;
 import by.htp.hermanovich.pojo.News;
+import by.htp.hermanovich.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -18,9 +18,8 @@ import java.util.List;
 @Repository("newsDao")
 public class NewsDaoImpl implements NewsDao {
 
+    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     private Session session;
-    @Autowired
-    private SessionFactory sessionFactory;
 
     /**
      * This method reads and returns instance of the News object from corresponding database table
