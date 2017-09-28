@@ -5,8 +5,7 @@
 <html>
 	<head>
 		<title><spring:message code="label.newsviewname"/></title>
-		<spring:url value="/resources/css/main.css" var="mainCss" />
-		<link href="${mainCss}" rel="stylesheet" />
+		<link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet" />
 		<script type="text/javascript">
             function confirmUpdateDelete() {
                 if (confirm("Please, confirm the action.")) {

@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<title>Create News Context</title>
-		<link rel="stylesheet" href="/resources/css/main.css" />
+		<link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet" />
 		<script>
             function resetForm() {
                 document.getElementById("regform").reset();
