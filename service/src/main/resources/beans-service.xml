@@ -12,14 +12,6 @@
 
 	<import resource="classpath*:beans-dao.xml"/>
 
-	<!-- Define Hibernate transaction manager and bind the session factory filed as a property -->
-	<bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<property name="sessionFactory" ref="getSessionFactory"/>
-	</bean>
-
-	<!-- Define the transaction manager component -->
-	<tx:annotation-driven transaction-manager="txManager"/>
-
 	<context:annotation-config/>
 	<context:component-scan base-package="by.htp.hermanovich.service"/>
 </beans>

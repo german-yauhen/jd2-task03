@@ -42,7 +42,7 @@
 									<a href="edit-news?newsId=${news.id}"><spring:message code="label.editname"/></a>
 								</div>
 								<div class="checkbox-elem">
-									<form:checkbox path="taggedIds" value="${news.id}" cssClass="check-me"/>
+									<form:checkbox path="taggedIds" value="${news.id}" cssClass="checkedId"/>
 								</div>
 							</div>
 						</div>
